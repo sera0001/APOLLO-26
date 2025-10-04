@@ -25,6 +25,32 @@ public class HabitatManager : MonoBehaviour
         if (!placedMat) { placedMat = new Material(shader); placedMat.color = new Color(0.8f,0.82f,0.86f,1f); }
         if (!previewMat) { previewMat = new Material(shader); previewMat.color = new Color(0.2f,0.8f,1f,0.5f); }
     }
+    private GameObject MakePrimitive(HabitatModule module, bool isPreview = false)
+{
+    // Create a basic cube (you can later swap to prefab per module)
+    GameObject obj = GameObject.CreatePrimitive(PrimitiveType.Cube);
+    obj.name = module.ToString();
+
+    // Give it a default size
+    obj.transform.localScale = new Vector3(2f, 2f, 2f);
+
+    // Give it a light color when previewing
+    var renderer = obj.GetComponent<Renderer>();
+    if (renderer)
+    {
+        renderer.material = new Material(Shader.Find("Universal Render Pipeline/Lit"));
+        renderer.material.color = isPreview ? new Color(1f, 1f, 1f, 0.5f) : Color.white;
+    }
+
+    // Disable collider while previewing
+    if (isPreview)
+    {
+        var col = obj.GetComponent<Collider>();
+        if (col) col.enabled = false;
+    }
+
+    return obj;
+}
 
     void Update()
     {

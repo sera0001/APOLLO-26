@@ -17,7 +17,12 @@ public class EnvironmentSwitcher : MonoBehaviour
     void Start()
     {
         if (!ground) { var g = GameObject.Find("Ground"); if (g) ground = g.transform; }
-        if (!mainLight) { mainLight = FindObjectOfType<Light>(); }
+        #if UNITY_2023_1_OR_NEWER
+if (!mainLight) mainLight = Object.FindFirstObjectByType<Light>();
+#else
+if (!mainLight) mainLight = Object.FindObjectOfType<Light>();
+#endif
+
 
         var shader = Shader.Find("Universal Render Pipeline/Lit");
         if (shader == null) shader = Shader.Find("Standard");
