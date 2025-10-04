@@ -1,0 +1,15 @@
+{
+  "version": "1.0",
+  "per_crew_volume_m3": {
+    "Sleep": 4.0
+  },
+  "fixed_min_volume_m3": {
+    "Hygiene": 2.0,
+    "Galley": 5.0,
+    "Recreation": 8.0,
+    "ECLSS": 4.0
+  },
+  "percent_of_total": {
+    "Storage": 0.1
+  }
+}
